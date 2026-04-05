@@ -39,6 +39,13 @@ The chord detection / naming algorithm lives in:
 - `src/chord.hpp`
   - `Chord::to_sf_string(...)`: final chord-name string formatting
 
+TypeScript port (for reuse in other projects):
+- `service/ChordDetector.ts`
+  - `detectChordsFromMidi(...)`: returns the best chord matches from MIDI notes
+  - `detectChordNameFromMidi(...)`: returns a single display chord name from MIDI notes
+- `service/utils.ts`
+  - chord templates, interval math helpers, and chord string formatting utilities
+
 Runtime flow:
 - Pressed MIDI notes are collected in `Piano::getPressedNotes()` (`src/piano.cpp`)
 - `MainScreen` calls `name_that_chord(...)` (`src/main_screen.cpp`)

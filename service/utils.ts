@@ -3,6 +3,8 @@ export type ChordTemplate = {
     notes: number[];
 };
 
+export const SEMITONES_IN_OCTAVE = 12;
+
 export type ChordMatch = {
     root: number;
     baseName: string;
@@ -77,7 +79,7 @@ export const chordDb: ChordTemplate[] = [
 ];
 
 export function mod12(value: number): number {
-    return ((value % 12) + 12) % 12;
+    return ((value % SEMITONES_IN_OCTAVE) + SEMITONES_IN_OCTAVE) % SEMITONES_IN_OCTAVE;
 }
 
 export function midiToPitchClassFromA0(midiNote: number): number {
@@ -86,7 +88,7 @@ export function midiToPitchClassFromA0(midiNote: number): number {
 
 export function getNoteDistance(root: number, other: number): number {
     if (root > other) {
-        return 12 + mod12(other - root);
+        return SEMITONES_IN_OCTAVE + mod12(other - root);
     }
     return mod12(other - root);
 }
@@ -107,12 +109,12 @@ export function formatChord(chord: ChordMatch, useSharps = true): string {
 
     for (const tone of chord.omittedTones) {
         remaining -= 1;
-        result += `no${degrees[tone % 12]}${remaining === 0 ? ")" : ","}`;
+        result += `no${degrees[tone % SEMITONES_IN_OCTAVE]}${remaining === 0 ? ")" : ","}`;
     }
 
     for (const tone of chord.extraTones) {
         remaining -= 1;
-        result += `${compoundIntervalLabels[tone % 12]}${remaining === 0 ? ")" : ","}`;
+        result += `${compoundIntervalLabels[tone % SEMITONES_IN_OCTAVE]}${remaining === 0 ? ")" : ","}`;
     }
 
     if (chord.bass !== undefined && chord.bass !== chord.root) {
