@@ -3,6 +3,7 @@ import {
     formatChord,
     sharpNames,
     flatNames,
+    simplifiedChordTypes,
     getNoteDistance,
     midiToPitchClassFromA0,
     setDifference,
@@ -76,7 +77,7 @@ export function detectChordNameFromMidi(midiNotes: number[], useSharps = true): 
         return "";
     }
     const chord = chords[0];
-    if (chord.numAccidentals === 0 && ["maj", "sus2", "sus4"].includes(chord.baseName)) {
+    if (chord.numAccidentals === 0 && simplifiedChordTypes.has(chord.baseName)) {
         const names = useSharps ? sharpNames : flatNames;
         const base = names[chord.root];
         if (chord.bass !== undefined && chord.bass !== chord.root) {

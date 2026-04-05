@@ -32,6 +32,7 @@ export const compoundIntervalLabels = [
 
 export const sharpNames = ["A", "A♯", "B", "C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯"];
 export const flatNames = ["A", "B♭", "B", "C", "D♭", "D", "E♭", "E", "F", "G♭", "G", "A♭"];
+export const simplifiedChordTypes = new Set(["maj", "sus2", "sus4"]);
 
 export const chordDb: ChordTemplate[] = [
     { name: "maj", notes: [4, 7] },
