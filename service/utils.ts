@@ -67,7 +67,7 @@ export function mod12(value: number): number {
     return ((value % 12) + 12) % 12;
 }
 
-export function midiToPitchClassA(midiNote: number): number {
+export function midiToPitchClassFromA0(midiNote: number): number {
     return mod12(midiNote - 21);
 }
 

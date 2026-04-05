@@ -4,7 +4,7 @@ import {
     sharpNames,
     flatNames,
     getNoteDistance,
-    midiToPitchClassA,
+    midiToPitchClassFromA0,
     setDifference,
 } from "./utils.ts";
 import type { ChordMatch } from "./utils.ts";
@@ -44,7 +44,7 @@ export function detectChordsFromMidi(midiNotes: number[]): ChordMatch[] {
         return [];
     }
 
-    const pitchClasses = uniqueSorted(midiNotes.map(midiToPitchClassA));
+    const pitchClasses = uniqueSorted(midiNotes.map(midiToPitchClassFromA0));
     const result: ChordMatch[] = [];
 
     for (const root of pitchClasses) {
@@ -59,7 +59,7 @@ export function detectChordsFromMidi(midiNotes: number[]): ChordMatch[] {
     const sorted = [...result].sort(compareChords);
     if (sorted.length === 0) return [];
 
-    const bassPitchClass = midiToPitchClassA(Math.min(...midiNotes));
+    const bassPitchClass = midiToPitchClassFromA0(Math.min(...midiNotes));
     const bestAccidentals = sorted[0].numAccidentals;
     const best = sorted.filter((c) => c.numAccidentals === bestAccidentals);
 
