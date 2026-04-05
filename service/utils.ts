@@ -88,7 +88,7 @@ export function getNoteDistance(root: number, other: number): number {
     if (root > other) {
         return 12 + mod12(other - root);
     }
-    return other - root;
+    return mod12(other - root);
 }
 
 export function setDifference(a: number[], b: number[]): number[] {
