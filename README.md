@@ -31,17 +31,17 @@ Chordcat is a desktop app that helps you identify and name chords based on input
 
 The chord detection / naming algorithm lives in:
 
-- `/home/runner/work/chordcat/chordcat/src/utils.hpp`
+- `src/utils.hpp`
   - `name_that_chord(const std::vector<size_t>& indices)`: main chord-detection entrypoint
   - `insert_chords(...)`: matches note intervals against `chord_db`
-- `/home/runner/work/chordcat/chordcat/src/chord_db.hpp`
+- `src/chord_db.hpp`
   - chord templates (e.g. `maj`, `m7`, `sus2`, etc.) used for matching
-- `/home/runner/work/chordcat/chordcat/src/chord.hpp`
+- `src/chord.hpp`
   - `Chord::to_sf_string(...)`: final chord-name string formatting
 
 Runtime flow:
-- Pressed MIDI notes are collected in `Piano::getPressedNotes()` (`/home/runner/work/chordcat/chordcat/src/piano.cpp`)
-- `MainScreen` calls `name_that_chord(...)` (`/home/runner/work/chordcat/chordcat/src/main_screen.cpp`)
+- Pressed MIDI notes are collected in `Piano::getPressedNotes()` (`src/piano.cpp`)
+- `MainScreen` calls `name_that_chord(...)` (`src/main_screen.cpp`)
 - The detected chord names are rendered on screen
 
 Example: for pressed notes `G3 C4 D4 G4`, the algorithm normalizes pitches to pitch classes and
