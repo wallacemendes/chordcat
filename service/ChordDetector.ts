@@ -56,12 +56,12 @@ export function detectChordsFromMidi(midiNotes: number[]): ChordMatch[] {
         insertBestChordForRoot(root, uniqueSorted(intervals), result);
     }
 
-    const sorted = [...result].sort(compareChords);
-    if (sorted.length === 0) return [];
+    result.sort(compareChords);
+    if (result.length === 0) return [];
 
     const bassPitchClass = midiToPitchClassFromA0(Math.min(...midiNotes));
-    const bestAccidentals = sorted[0].numAccidentals;
-    const best = sorted.filter((c) => c.numAccidentals === bestAccidentals);
+    const bestAccidentals = result[0].numAccidentals;
+    const best = result.filter((c) => c.numAccidentals === bestAccidentals);
 
     for (const chord of best) {
         chord.bass = bassPitchClass;

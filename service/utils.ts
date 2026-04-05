@@ -13,7 +13,20 @@ export type ChordMatch = {
 };
 
 export const degrees = ["root", "♭2", "2", "♭3", "3", "4", "♭5", "5", "♭6", "6", "♭7", "7"];
-export const compoundTones = ["octave", "♭9", "9", "♭10", "10", "11", "♯11", "5", "♭13", "13", "♭7", "7"];
+export const compoundIntervalLabels = [
+    "octave",
+    "♭9",
+    "9",
+    "♭10",
+    "10",
+    "11",
+    "♯11",
+    "5",
+    "♭13",
+    "13",
+    "♭7",
+    "7",
+];
 
 export const sharpNames = ["A", "A♯", "B", "C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯"];
 export const flatNames = ["A", "B♭", "B", "C", "D♭", "D", "E♭", "E", "F", "G♭", "G", "A♭"];
@@ -72,7 +85,7 @@ export function midiToPitchClassFromA0(midiNote: number): number {
 }
 
 export function getNoteDistance(root: number, other: number): number {
-    if (root >= other) {
+    if (root > other) {
         return 12 + mod12(other - root);
     }
     return other - root;
@@ -99,7 +112,7 @@ export function formatChord(chord: ChordMatch, useSharps = true): string {
 
     for (const tone of chord.extraTones) {
         remaining -= 1;
-        result += `${compoundTones[tone % 12]}${remaining === 0 ? ")" : ","}`;
+        result += `${compoundIntervalLabels[tone % 12]}${remaining === 0 ? ")" : ","}`;
     }
 
     if (chord.bass !== undefined && chord.bass !== chord.root) {
