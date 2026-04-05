@@ -7,8 +7,8 @@ import {
     getNoteDistance,
     midiToPitchClassFromA0,
     setDifference,
+    type ChordMatch,
 } from "./utils.ts";
-import type { ChordMatch } from "./utils.ts";
 
 function uniqueSorted(values: number[]): number[] {
     return Array.from(new Set(values)).sort((a, b) => a - b);
